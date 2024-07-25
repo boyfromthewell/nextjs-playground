@@ -1,17 +1,17 @@
 'use client';
 
 import styled from 'styled-components';
-import PopularVideo from './_components/PopularVideo';
+import VideoSection from './_components/VideoSection';
 
 export default function Home() {
   return (
-    <MainContainer>
-      <PopularVideo />
-    </MainContainer>
+    <PageWrapper>
+      <VideoSection />
+    </PageWrapper>
   );
 }
 
-const MainContainer = styled.div`
+const PageWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;

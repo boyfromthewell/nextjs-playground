@@ -1,11 +1,12 @@
 import { getPopularVideoList } from '@/api/getPopularVideo';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
+import VideoInfo from './VideoInfo';
 
-export default function PopularVideo() {
+export default function VideoSection() {
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
     queryKey: ['videos', 'popular'],
     queryFn: ({ pageParam = '' }) =>
@@ -26,23 +27,16 @@ export default function PopularVideo() {
     <>
       <Wrapper>
         {data?.pages.map((page) => (
-          <>
+          <Fragment key={page.etag}>
             {page.items?.map((item) => (
-              <Box>
-                <Image
-                  priority
-                  src={item.snippet.thumbnails.standard.url}
-                  alt="썸네일 이미지"
-                  width={300}
-                  height={200}
-                />
-                {item.snippet.title}
-              </Box>
+              <VideoInfo key={item.etag} info={item} />
             ))}
-          </>
+          </Fragment>
         ))}
       </Wrapper>
-      {!isFetching && <div ref={ref} style={{ height: 50 }} />}
+      {!isFetching && (
+        <div ref={ref} style={{ height: 50, backgroundColor: 'red' }} />
+      )}
     </>
   );
 }
@@ -52,11 +46,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content: center;
   gap: 30px;
-`;
-
-const Box = styled.div`
-  width: 400px;
-  height: 400px;
+  padding: 40px;
 `;
