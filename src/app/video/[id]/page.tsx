@@ -4,11 +4,14 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import VideoInfo from './_components/VideoInfo';
+import { Suspense } from 'react';
+import Comments from './_components/Comments';
+import VideoSection from './_components/VideoSection';
 
 export default async function Video({ params }: { params: { id: string } }) {
   const { id } = params;
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: ['video', id],
     queryFn: getVideoDetail,
@@ -18,7 +21,10 @@ export default async function Video({ params }: { params: { id: string } }) {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <VideoInfo id={id} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <VideoSection id={id} />
+        <Comments />
+      </Suspense>
     </HydrationBoundary>
   );
 }

@@ -6,16 +6,14 @@ import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import VideoInfo from './VideoInfo';
 
-export default function VideoSection() {
+export default function VideoSection({ regionCode }) {
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-    queryKey: ['videos', 'popular'],
-    queryFn: ({ pageParam = '' }) =>
-      getPopularVideoList({ nextPageToken: pageParam }),
+    queryKey: ['videos', 'popular', regionCode],
+    queryFn: ({ queryKey, pageParam = '' }) =>
+      getPopularVideoList({ nextPageToken: pageParam, queryKey }),
     initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextPageToken,
   });
-
-  console.log(data);
 
   const { ref, inView } = useInView({ threshold: 0, delay: 0 });
 
@@ -47,5 +45,5 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   gap: 30px;
-  padding: 40px;
+  padding: 0 40px;
 `;
