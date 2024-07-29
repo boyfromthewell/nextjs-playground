@@ -18,7 +18,7 @@ export default function VideoInfo({ info }: VideoInfoProps) {
     <VideoInfoContainer>
       <Image
         priority
-        src={info.snippet.thumbnails.standard.url}
+        src={info.snippet.thumbnails.standard?.url || ''}
         alt="썸네일 이미지"
         width={480}
         height={360}

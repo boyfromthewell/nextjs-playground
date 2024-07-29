@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
 }: Readonly<{
+  auth: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
@@ -22,7 +24,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <RQProvider>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <StyledComponentsRegistry>
+            {children}
+            {auth}
+          </StyledComponentsRegistry>
         </RQProvider>
       </body>
     </html>
