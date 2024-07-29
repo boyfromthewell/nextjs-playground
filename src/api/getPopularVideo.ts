@@ -2,7 +2,7 @@ export async function getPopularVideoList({
   nextPageToken = '',
   queryKey,
 }: {
-  nextPageToken?: string;
+  nextPageToken: string;
   queryKey: string[];
 }) {
   const [_1, _2, regionCode] = queryKey;
@@ -15,5 +15,11 @@ export async function getPopularVideoList({
       },
     },
   );
-  return res.json();
+
+  const data = await res.json();
+  return {
+    id: data.etag,
+    items: data.items,
+    nextPageToken: data.nextPageToken,
+  };
 }

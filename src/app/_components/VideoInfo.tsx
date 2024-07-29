@@ -2,17 +2,27 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import GotoChannelBtn from './GotoChannelBtn';
 import Link from 'next/link';
+import { SnippetInfo } from '@/types/Video';
 
-export default function VideoInfo({ info }) {
+interface VideoInfoProps {
+  info: {
+    etag: string;
+    id: string;
+    kind: string;
+    snippet: SnippetInfo;
+  };
+}
+
+export default function VideoInfo({ info }: VideoInfoProps) {
   return (
     <VideoInfoContainer>
-      {' '}
       <Image
         priority
         src={info.snippet.thumbnails.standard.url}
         alt="썸네일 이미지"
         width={480}
         height={360}
+        style={{ borderRadius: 8 }}
       />
       <Infos>
         <GotoChannelBtn
@@ -55,11 +65,6 @@ const Title = styled.h2`
   padding: 14px;
   border-radius: 8px;
   border: 1px solid lightgray;
-`;
-
-const Description = styled.p`
-  background-color: lightgray;
-  white-space: pre-wrap;
 `;
 
 const Tags = styled.div`

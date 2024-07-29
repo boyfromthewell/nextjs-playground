@@ -6,11 +6,12 @@ import { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import styled from 'styled-components';
 import VideoInfo from './VideoInfo';
+import { VideoDetail } from '@/types/Video';
 
-export default function VideoSection({ id }) {
+export default function VideoSection({ id }: { id: string }) {
   const [isWindow, setIsWindow] = useState(false);
 
-  const { data } = useQuery({
+  const { data } = useQuery<VideoDetail>({
     queryKey: ['video', id],
     queryFn: getVideoDetail,
     staleTime: 0,
@@ -34,7 +35,7 @@ export default function VideoSection({ id }) {
           />
         )}
       </VideoWrapper>
-      <VideoInfo info={data} />
+      {data && <VideoInfo info={data} />}
     </VideoInfoSection>
   );
 }

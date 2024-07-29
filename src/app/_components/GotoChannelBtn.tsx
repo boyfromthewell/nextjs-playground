@@ -2,7 +2,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import TVIcon from '../../../public/tv.svg';
 
-export default function GotoChannelBtn({ channel, id }) {
+export default function GotoChannelBtn({
+  channel,
+  id,
+}: {
+  channel: string;
+  id: string;
+}) {
   return (
     <Link href={`https://www.youtube.com/channel/${id}`} target="_blank">
       <GotoChannel>

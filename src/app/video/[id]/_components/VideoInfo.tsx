@@ -1,6 +1,7 @@
+import { VideoDetail } from '@/types/Video';
 import styled from 'styled-components';
 
-export default function VideoInfo({ info }) {
+export default function VideoInfo({ info }: { info: VideoDetail }) {
   const {
     title,
     description,

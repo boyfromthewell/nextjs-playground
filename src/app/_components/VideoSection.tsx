@@ -1,16 +1,21 @@
 import { getPopularVideoList } from '@/api/getPopularVideo';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import Image from 'next/image';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import VideoInfo from './VideoInfo';
+import { VideoInfo as Video } from '@/types/Video';
 
-export default function VideoSection({ regionCode }) {
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+export default function VideoSection({ regionCode }: { regionCode: string }) {
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+    Video,
+    object,
+    InfiniteData<Video>,
+    [_1: string, _2: string, _3: string]
+  >({
     queryKey: ['videos', 'popular', regionCode],
     queryFn: ({ queryKey, pageParam = '' }) =>
-      getPopularVideoList({ nextPageToken: pageParam, queryKey }),
+      getPopularVideoList({ nextPageToken: pageParam as string, queryKey }),
     initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextPageToken,
   });
@@ -25,7 +30,7 @@ export default function VideoSection({ regionCode }) {
     <>
       <Wrapper>
         {data?.pages.map((page) => (
-          <Fragment key={page.etag}>
+          <Fragment key={page.id}>
             {page.items?.map((item) => (
               <VideoInfo key={item.etag} info={item} />
             ))}
