@@ -23,6 +23,16 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'ssl.pstatic.net',
+        port: '',
+      },
+      {
+        protocol: 'http',
+        hostname: 'k.kakaocdn.net',
+        port: '',
+      },
     ],
   },
 };

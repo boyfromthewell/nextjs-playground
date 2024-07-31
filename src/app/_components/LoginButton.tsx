@@ -6,6 +6,17 @@ import Image from 'next/image';
 export default function LoginButton() {
   const { data } = useSession();
 
+  const returnProvider = (provider: string) => {
+    switch (provider) {
+      case 'google':
+        return <Chip>구글 로그인</Chip>;
+      case 'kakao':
+        return <Chip>카카오 로그인</Chip>;
+      case 'naver':
+        return <Chip>네이버 로그인</Chip>;
+    }
+  };
+
   return (
     <Wrapper>
       {!data ? (
@@ -22,7 +33,7 @@ export default function LoginButton() {
         </>
       ) : (
         <Info>
-          {data.user && (
+          {data && (
             <UsernameAndImage>
               <Image
                 src={data.user.image as string}
@@ -30,10 +41,15 @@ export default function LoginButton() {
                 height="35"
                 alt="user profile"
               />
-              <Name>{data.user.email} 님</Name>
+              <Name>
+                {data.user.provider === 'google'
+                  ? data.user.email
+                  : data.user.name}{' '}
+                님
+              </Name>
             </UsernameAndImage>
           )}
-
+          {returnProvider(data.user.provider as string)}
           <Button onClick={() => signOut({ redirect: false })}>로그아웃</Button>
         </Info>
       )}
@@ -92,4 +108,16 @@ const UsernameAndImage = styled.div`
 const Name = styled.p`
   font-size: 17px;
   font-weight: 500;
+`;
+
+const Chip = styled.div`
+  width: fit-content;
+  height: 37px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 10px;
+  padding: 8px;
 `;
