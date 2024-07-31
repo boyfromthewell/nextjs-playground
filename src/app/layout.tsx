@@ -4,6 +4,7 @@ import './globals.css';
 import StyledComponentsRegistry from '@/lib/registry';
 import RQProvider from '@/lib/RQProvider';
 import Header from './_components/Header';
+import AuthSession from '@/lib/SessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,13 +23,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <Header />
-        <RQProvider>
-          <StyledComponentsRegistry>
-            {children}
-            {auth}
-          </StyledComponentsRegistry>
-        </RQProvider>
+        <AuthSession>
+          <Header />
+          <RQProvider>
+            <StyledComponentsRegistry>
+              {children}
+              {auth}
+            </StyledComponentsRegistry>
+          </RQProvider>
+        </AuthSession>
       </body>
     </html>
   );
