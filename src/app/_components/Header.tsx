@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import LoginButton from './LoginButton';
 
 export default function Header() {
+  const test = async () => {
+    const res = await fetch(`/api/post`);
+    console.log(res);
+  };
   return (
     <Wrapper>
       <Title>
@@ -16,6 +20,7 @@ export default function Header() {
         <nav>
           <Link href="/chimhaha">침하하</Link>
         </nav>
+        <button onClick={test}> prisma test</button>
       </NavWrapper>
     </Wrapper>
   );
