@@ -26,7 +26,6 @@ const handler = NextAuth({
       return url.startsWith(baseUrl) ? baseUrl : url;
     },
     async jwt({ token, user, account }) {
-      console.log(token);
       if (account) {
         token.provider = account.provider;
         token.accessToken = account.access_token;
