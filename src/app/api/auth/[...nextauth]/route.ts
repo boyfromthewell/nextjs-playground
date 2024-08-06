@@ -26,15 +26,37 @@ const handler = NextAuth({
       return url.startsWith(baseUrl) ? baseUrl : url;
     },
     async jwt({ token, user, account }) {
+      console.log(token);
       if (account) {
         token.provider = account.provider;
+        token.accessToken = account.access_token;
       }
       if (user) {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
         token.picture = user.image;
+
+        try {
+          const res = await fetch(`${process.env.BASE_URL}/api/user`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: user.email,
+              name: user.name,
+              image: user.image,
+              provider: account.provider,
+              providerId: user.id,
+            }),
+          });
+          if (res.status === 200) console.log('ok');
+        } catch (error) {
+          console.error('Failed to post user data:', error);
+        }
       }
+
       return token;
     },
     async session({ session, token }) {
@@ -43,6 +65,8 @@ const handler = NextAuth({
       session.user.email = token.email;
       session.user.image = token.picture;
       session.user.provider = token.provider;
+      session.user.accessToken = token.accessToken;
+
       return session;
     },
   },
