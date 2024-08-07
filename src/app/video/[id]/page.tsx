@@ -7,15 +7,22 @@ import {
 import { Suspense } from 'react';
 import Comments from './_components/Comments';
 import VideoSection from './_components/VideoSection';
+import { getComment } from '@/api/comment';
 
 export default async function Video({ params }: { params: { id: string } }) {
   const { id } = params;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['video', id],
-    queryFn: getVideoDetail,
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['video', id],
+      queryFn: getVideoDetail,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['comment', id],
+      queryFn: getComment,
+    }),
+  ]);
 
   const dehydratedState = dehydrate(queryClient);
 
@@ -23,7 +30,7 @@ export default async function Video({ params }: { params: { id: string } }) {
     <HydrationBoundary state={dehydratedState}>
       <Suspense fallback={<div>Loading...</div>}>
         <VideoSection id={id} />
-        <Comments />
+        <Comments id={id} />
       </Suspense>
     </HydrationBoundary>
   );

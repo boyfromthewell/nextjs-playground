@@ -1,3 +1,5 @@
+import { QueryFunctionContext } from '@tanstack/react-query';
+
 type RequestType = {
   videoId: string;
   userId: string;
@@ -24,17 +26,15 @@ export async function postComment(reqBody: RequestType, accessToken: string) {
   return false;
 }
 
-export async function getComment(videoId: string) {
+export async function getComment({ queryKey }: QueryFunctionContext) {
+  const [_1, id] = queryKey as [string, string];
   try {
-    const res = await fetch(
-      `/api/comment?videoId=${encodeURIComponent(videoId)}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    const res = await fetch(`/api/comment?videoId=${encodeURIComponent(id)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+    });
     if (res.status === 200) {
       return res.json();
     }

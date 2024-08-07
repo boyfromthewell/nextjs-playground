@@ -1,19 +1,35 @@
+'use client';
+
 import { getComment } from '@/api/comment';
-import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
 export default function CommentList({ videoId }: { videoId: string }) {
-  useEffect(() => {
-    const fetchComment = async () => {
-      const res = await getComment(videoId);
-      console.log(res);
-    };
-    fetchComment();
-  }, []);
-  return <ListContainer>fdfd</ListContainer>;
+  const { data } = useQuery({
+    queryKey: ['comment', videoId],
+    queryFn: getComment,
+    refetchOnMount: true,
+    refetchInterval: 30000,
+  });
+
+  console.log(data);
+
+  return (
+    <>
+      {data?.comments.map(({ userId, content, createdAt }) => (
+        <CommentWrapper>
+          {userId}
+          {content}
+          {createdAt}
+        </CommentWrapper>
+      ))}
+    </>
+  );
 }
 
-const ListContainer = styled.div`
+const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 120px;
 `;
