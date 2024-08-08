@@ -1,6 +1,6 @@
 'use client';
 
-import { getVideoDetail } from '@/api/getVideoDetail';
+import { getVideoDetail } from '@/lib/api/getVideoDetail';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/youtube';
@@ -41,7 +41,7 @@ export default function VideoSection({ id }: { id: string }) {
 }
 
 const VideoInfoSection = styled.div`
-  width: 70%;
+  width: 60%;
   height: auto;
   display: flex;
   flex-direction: column;

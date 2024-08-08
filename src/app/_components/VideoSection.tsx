@@ -1,4 +1,4 @@
-import { getPopularVideoList } from '@/api/getPopularVideo';
+import { getPopularVideoList } from '@/lib/api/getPopularVideo';
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';

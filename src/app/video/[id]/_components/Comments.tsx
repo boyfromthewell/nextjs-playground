@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 import CommentForm from './CommentForm';
 import { ChangeEvent, useState } from 'react';
-import { postComment } from '@/api/comment';
+import { postComment } from '@/lib/api/comment';
 import { useSession } from 'next-auth/react';
 import CommentList from './CommentList';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -58,13 +58,14 @@ export default function Comments({ id }: { id: string }) {
 const CommentsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 40%;
   padding: 8px;
-  width: 30%;
-  height: auto;
-  background-color: lightblue;
 `;
 
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 57dvh;
+  overflow-y: auto;
 `;

@@ -38,8 +38,6 @@ const FormContainer = styled.div`
   width: 100%;
   height: fit-content;
   gap: 12px;
-  border-radius: 12px;
-  border: 1px solid lightgray;
   padding: 12px;
   span {
     font-size: 18px;

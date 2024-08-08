@@ -1,4 +1,4 @@
-import { getVideoDetail } from '@/api/getVideoDetail';
+import { getVideoDetail } from '@/lib/api/getVideoDetail';
 import {
   dehydrate,
   HydrationBoundary,
@@ -7,7 +7,7 @@ import {
 import { Suspense } from 'react';
 import Comments from './_components/Comments';
 import VideoSection from './_components/VideoSection';
-import { getComment } from '@/api/comment';
+import { getComment } from '@/lib/api/comment';
 
 export default async function Video({ params }: { params: { id: string } }) {
   const { id } = params;

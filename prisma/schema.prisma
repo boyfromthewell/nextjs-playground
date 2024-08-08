@@ -27,5 +27,7 @@ model Comment {
   content   String
   videoId   String
   createdAt DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  like      Int?      @default(0)
+  disLike   Int?      @default(0)
   video     Video     @relation(fields: [videoId], references: [videoId])
 }
