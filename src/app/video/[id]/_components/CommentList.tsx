@@ -65,7 +65,7 @@ export default function CommentList({ videoId }: { videoId: string }) {
   return (
     <CommentWrapper>
       {data?.comments.map(
-        ({ id, userId, content, createdAt, like, disLike }) => (
+        ({ id, userId, content, createdAt, like, disLike }: any) => (
           <CommentBox key={`${id}${content}`}>
             <NameAndDate>
               <UserName>{userId}</UserName> <Date>{createdAt}</Date>

@@ -46,7 +46,7 @@ const handler = NextAuth({
               email: user.email,
               name: user.name,
               image: user.image,
-              provider: account.provider,
+              provider: account!.provider,
               providerId: user.id,
             }),
           });
