@@ -25,7 +25,7 @@ export default function Chimhaha() {
       <Wrapper>
         {data?.pages.map((page) => (
           <Fragment key={page.id}>
-            {page.items?.map((item) => (
+            {page.items?.map((item: any) => (
               <PlaylistInfo key={item.etag} info={item} />
             ))}
           </Fragment>

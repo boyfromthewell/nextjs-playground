@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 
-export default function PlaylistInfo({ info }) {
+export default function PlaylistInfo({ info }: { info: any }) {
   return (
     <PlaylistInfoContainer>
       <Image
