@@ -19,6 +19,11 @@ export default function CommentForm({
 
   return (
     <FormContainer>
+      {!data && (
+        <OverlayForm>
+          <p>로그인 완료 된 사용자만 이용 가능합니다.</p>
+        </OverlayForm>
+      )}
       <span>댓글 남기기</span>
       <Name>{data?.user.email || data?.user.name}</Name>
       <CommentInput value={value} onChange={onChange} />
@@ -33,6 +38,7 @@ export default function CommentForm({
 }
 
 const FormContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -44,6 +50,23 @@ const FormContainer = styled.div`
     font-weight: 600;
   }
 `;
+
+const OverlayForm = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 999;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  background-color: rgba(255, 255, 255, 0.8);
+  p {
+    font-size: 1.125rem;
+    line-height: 1.8rem;
+    font-weight: 600;
+  }
+`;
+
 const Name = styled.p``;
 
 const CommentInput = styled.textarea`
