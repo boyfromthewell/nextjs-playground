@@ -6,16 +6,39 @@ export async function POST(req: NextRequest) {
   const { email, name, image, provider } = body;
 
   try {
-    await prisma.user.create({
-      data: {
-        email,
+    const existUser = await prisma.user.findFirst({
+      where: {
         name,
-        image,
         provider,
       },
     });
+
+    if (existUser) {
+      await prisma.user.update({
+        where: {
+          email: existUser.email,
+          name: existUser.name,
+          image: existUser.image,
+        },
+        data: {
+          email,
+          name,
+          image,
+        },
+      });
+    } else {
+      await prisma.user.create({
+        data: {
+          email,
+          name,
+          image,
+          provider,
+        },
+      });
+    }
     return NextResponse.json({}, { status: 200 });
   } catch (e) {
+    console.log(e);
     return NextResponse.json({ error: 'Server Error' }, { status: 500 });
   }
 }
