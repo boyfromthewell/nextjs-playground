@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GotoChannelBtn from './GotoChannelBtn';
 import Link from 'next/link';
 import { SnippetInfo } from '@/types/Video';
+import { dateStrToKorStr } from '@/lib/date';
 
 interface VideoInfoProps {
   info: {
@@ -11,9 +12,11 @@ interface VideoInfoProps {
     kind: string;
     snippet: SnippetInfo;
   };
+  type: 'COMMON' | 'CHIMHAHA';
 }
 
-export default function VideoInfo({ info }: VideoInfoProps) {
+export default function VideoInfo({ info, type }: VideoInfoProps) {
+  console.log(info);
   return (
     <VideoInfoContainer>
       <Image
@@ -25,11 +28,19 @@ export default function VideoInfo({ info }: VideoInfoProps) {
         style={{ borderRadius: 8 }}
       />
       <Infos>
-        <GotoChannelBtn
-          channel={info.snippet.channelTitle}
-          id={info.snippet.channelId}
-        />
-        <Link href={`/video/${info.id}`}>
+        {type === 'COMMON' && (
+          <GotoChannelBtn
+            channel={info.snippet.channelTitle}
+            id={info.snippet.channelId}
+          />
+        )}
+        <Link
+          href={
+            type === 'COMMON'
+              ? `/video/${info.id}`
+              : `/video/${info.snippet.resourceId?.videoId}`
+          }
+        >
           <Title>{info.snippet.title}</Title>
         </Link>
         <Tags>
@@ -37,7 +48,7 @@ export default function VideoInfo({ info }: VideoInfoProps) {
             ?.slice(0, 6)
             .map((text) => <Tag key={text}>#{text}</Tag>)}
         </Tags>
-        <Published>{info.snippet.publishedAt}</Published>
+        <Published>{dateStrToKorStr(info.snippet.publishedAt)}</Published>
       </Infos>
     </VideoInfoContainer>
   );
@@ -87,4 +98,6 @@ const Tag = styled.p`
   font-weight: 600;
 `;
 
-const Published = styled.p``;
+const Published = styled.p`
+  margin-left: auto;
+`;

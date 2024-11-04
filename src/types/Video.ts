@@ -22,6 +22,10 @@ export type SnippetInfo = {
     medium: ThumbnailsType;
     standard: ThumbnailsType;
   };
+  resourceId?: {
+    kind: string;
+    videoId: string;
+  };
   title: string;
 };
 

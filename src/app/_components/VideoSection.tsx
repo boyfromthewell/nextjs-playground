@@ -32,14 +32,12 @@ export default function VideoSection({ regionCode }: { regionCode: string }) {
         {data?.pages.map((page) => (
           <Fragment key={page.id}>
             {page.items?.map((item) => (
-              <VideoInfo key={item.etag} info={item} />
+              <VideoInfo key={item.etag} info={item} type="COMMON" />
             ))}
           </Fragment>
         ))}
       </Wrapper>
-      {!isFetching && (
-        <div ref={ref} style={{ height: 50, backgroundColor: 'red' }} />
-      )}
+      {!isFetching && <div ref={ref} style={{ height: 10 }} />}
     </>
   );
 }
