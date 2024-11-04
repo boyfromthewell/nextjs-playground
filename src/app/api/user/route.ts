@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (existUser) {
       await prisma.user.update({
         where: {
-          email: existUser.email,
+          id: existUser.id,
         },
         data: {
           email,
