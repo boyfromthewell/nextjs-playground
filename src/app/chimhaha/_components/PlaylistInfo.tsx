@@ -1,4 +1,6 @@
+import { dateStrToKorStr } from '@/lib/date';
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export default function PlaylistInfo({ info }: { info: any }) {
@@ -17,9 +19,11 @@ export default function PlaylistInfo({ info }: { info: any }) {
         style={{ borderRadius: 8 }}
       />
       <InfoContainer>
-        <h2>{info.snippet.title}</h2>
+        <Link href={`/chimhaha/${info.id}`}>
+          <h2>{info.snippet.title}</h2>
+        </Link>
         <p>{info.snippet.description}</p>
-        <span>{info.snippet.publishedAt}</span>
+        <span>{dateStrToKorStr(info.snippet.publishedAt)}</span>
       </InfoContainer>
     </PlaylistInfoContainer>
   );
@@ -37,6 +41,7 @@ const InfoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 32px;
+  width: 100%;
 
   h2 {
     font-size: 32px;
@@ -44,5 +49,9 @@ const InfoContainer = styled.div`
   p {
     font-size: 20px;
     color: gray;
+  }
+
+  span {
+    margin-left: auto;
   }
 `;

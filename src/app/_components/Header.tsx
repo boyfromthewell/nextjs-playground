@@ -2,19 +2,38 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import LoginButton from './LoginButton';
+import Chim from '../../../public/chimhaha.jpg';
+import ChimPlus from '../../../public/chimhaha_plus.jpg';
+import ChimOrigin from '../../../public/chim_live.jpg';
+import Image from 'next/image';
 
 export default function Header() {
   return (
     <Wrapper>
       <Title>
-        Title <LoginButton />
+        <LoginButton />
       </Title>
       <NavWrapper>
         <nav>
           <Link href="/">인기 동영상</Link>
         </nav>
         <nav>
-          <Link href="/chimhaha">침하하</Link>
+          <Link href="/chimhaha">
+            <Image src={Chim} alt="logo" width="30" height="30" />
+            침하하
+          </Link>
+        </nav>
+        <nav>
+          <Link href="/chimhahaPlus">
+            <Image src={ChimPlus} alt="logo" width="30" height="30" />
+            침하하 뒷고기
+          </Link>
+        </nav>
+        <nav>
+          <Link href="/chimhahaOrigin">
+            <Image src={ChimOrigin} alt="logo" width="30" height="30" />
+            침하하 원본 박물관
+          </Link>
         </nav>
       </NavWrapper>
     </Wrapper>
@@ -35,7 +54,7 @@ const Title = styled.h1`
   font-size: 32px;
   height: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 const NavWrapper = styled.div`
@@ -54,7 +73,14 @@ const NavWrapper = styled.div`
     align-items: center;
     justify-content: center;
     a {
-      font-size: 24px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    img {
+      margin-right: 2px;
+      border-radius: 50%;
     }
   }
 `;
