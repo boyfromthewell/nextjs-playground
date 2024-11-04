@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { email, name, image, provider } = body;
+  const { email, name, image, provider, id } = body;
 
   try {
     const existUser = await prisma.user.findFirst({
@@ -17,8 +17,6 @@ export async function POST(req: NextRequest) {
       await prisma.user.update({
         where: {
           email: existUser.email,
-          name: existUser.name,
-          image: existUser.image,
         },
         data: {
           email,
