@@ -60,6 +60,10 @@ const CommentsContainer = styled.div`
   flex-direction: column;
   width: 40%;
   padding: 8px;
+  @media (max-width: 575px) {
+    width: 100%;
+    border-top: 2px solid lightgray;
+  }
 `;
 
 const ListContainer = styled.div`

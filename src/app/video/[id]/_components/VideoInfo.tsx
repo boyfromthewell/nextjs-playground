@@ -36,6 +36,13 @@ const InfoWrapper = styled.div`
     font-weight: 600;
     font-size: 27px;
   }
+
+  @media (max-width: 575px) {
+    h2 {
+      font-size: 1.25rem;
+      line-height: 24px;
+    }
+  }
 `;
 
 const Description = styled.div`
@@ -56,13 +63,28 @@ const ViewCountDate = styled.div`
     color: #0f0f0f;
     font-weight: 600;
   }
+
+  @media (max-width: 575px) {
+    p {
+      font-size: 1rem;
+    }
+  }
 `;
 
-const CommentLikeCount = styled(ViewCountDate)``;
+const CommentLikeCount = styled(ViewCountDate)`
+  @media (max-width: 575px) {
+    font-size: 0.925rem;
+  }
+`;
 
 const ScrollableDescription = styled.span`
   overflow-y: auto;
   max-height: 100%;
   padding-right: 8px;
   white-space: pre-wrap;
+  @media (max-width: 575px) {
+    border-top: 1px solid black;
+    padding-top: 8px;
+    font-size: 0.9rem;
+  }
 `;

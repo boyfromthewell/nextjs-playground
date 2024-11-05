@@ -1,4 +1,5 @@
 import { getVideoDetail } from '@/lib/api/getVideoDetail';
+import styles from '@/styles/Video.module.css';
 import {
   dehydrate,
   HydrationBoundary,
@@ -29,8 +30,10 @@ export default async function Video({ params }: { params: { id: string } }) {
   return (
     <HydrationBoundary state={dehydratedState}>
       <Suspense fallback={<div>Loading...</div>}>
-        <VideoSection id={id} />
-        <Comments id={id} />
+        <div className={styles.container}>
+          <VideoSection id={id} />
+          <Comments id={id} />
+        </div>
       </Suspense>
     </HydrationBoundary>
   );

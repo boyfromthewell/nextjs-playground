@@ -28,4 +28,9 @@ const GotoChannel = styled.button`
   align-items: center;
   font-size: 20px;
   font-weight: 600;
+
+  @media (max-width: 575px) {
+    font-size: 0.725rem;
+    margin-top: 4px;
+  }
 `;

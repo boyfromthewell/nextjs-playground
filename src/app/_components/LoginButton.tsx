@@ -29,7 +29,6 @@ export default function LoginButton() {
               <p>회원가입</p>
             </Link>
           </LoginSignup>
-          <span>더 많은 즐거움을 누려보세요!</span>
         </>
       ) : (
         <Info>
@@ -65,6 +64,7 @@ const Wrapper = styled.div`
   span {
     font-size: 12px;
   }
+  padding-right: 12px;
 `;
 
 const LoginSignup = styled.div`
@@ -77,6 +77,12 @@ const LoginSignup = styled.div`
     font-size: 14px;
     cursor: pointer;
   }
+
+  @media (max-width: 575px) {
+    p {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -88,6 +94,10 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  @media (max-width: 575px) {
+    height: 32px;
+    font-size: 0.7rem;
+  }
 `;
 
 const Info = styled.div`
@@ -108,6 +118,9 @@ const UsernameAndImage = styled.div`
 const Name = styled.p`
   font-size: 17px;
   font-weight: 500;
+  @media (max-width: 575px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Chip = styled.div`
@@ -120,4 +133,7 @@ const Chip = styled.div`
   border-radius: 12px;
   font-size: 10px;
   padding: 8px;
+  @media (max-width: 575px) {
+    font-size: 0.7rem;
+  }
 `;

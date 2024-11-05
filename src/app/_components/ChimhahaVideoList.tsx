@@ -24,8 +24,6 @@ export default function ChimhahaVideolist({ id }: { id: string }) {
 
   const { ref, inView } = useInView({ threshold: 0, delay: 0 });
 
-  console.log(data);
-
   useEffect(() => {
     if (inView) !isFetching && hasNextPage && fetchNextPage();
   }, [inView, isFetching, hasNextPage, fetchNextPage]);

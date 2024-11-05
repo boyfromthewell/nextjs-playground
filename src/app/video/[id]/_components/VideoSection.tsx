@@ -7,6 +7,7 @@ import ReactPlayer from 'react-player/youtube';
 import styled from 'styled-components';
 import VideoInfo from './VideoInfo';
 import { VideoDetail } from '@/types/Video';
+import Comments from './Comments';
 
 export default function VideoSection({ id }: { id: string }) {
   const [isWindow, setIsWindow] = useState(false);
@@ -45,6 +46,10 @@ const VideoInfoSection = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 `;
 
 const VideoWrapper = styled.div`
@@ -52,6 +57,9 @@ const VideoWrapper = styled.div`
   height: 65%;
   padding: 18px;
   background-color: black;
+  @media (max-width: 575px) {
+    height: 360px;
+  }
 `;
 
 const Info = styled.div`

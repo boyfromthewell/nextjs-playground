@@ -16,7 +16,6 @@ interface VideoInfoProps {
 }
 
 export default function VideoInfo({ info, type }: VideoInfoProps) {
-  console.log(info);
   return (
     <VideoInfoContainer>
       <Image
@@ -59,6 +58,18 @@ const VideoInfoContainer = styled.div`
   gap: 24px;
   padding: 24px;
   width: 100%;
+
+  @media (max-width: 575px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 
 const Infos = styled.div`
@@ -76,6 +87,13 @@ const Title = styled.h2`
   padding: 14px;
   border-radius: 8px;
   border: 1px solid lightgray;
+
+  @media (max-width: 575px) {
+    word-break: break-all;
+    white-space: pre-wrap;
+    width: 100%;
+    font-size: 1.2rem;
+  }
 `;
 
 const Tags = styled.div`
@@ -96,8 +114,14 @@ const Tag = styled.p`
   font-size: 14px;
   color: #fff;
   font-weight: 600;
+  @media (max-width: 575px) {
+    font-size: 0.925rem;
+  }
 `;
 
 const Published = styled.p`
   margin-left: auto;
+  @media (max-width: 575px) {
+    font-size: 0.8rem;
+  }
 `;
