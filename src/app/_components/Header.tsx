@@ -116,6 +116,7 @@ const NavWrapper = styled.div`
 
     nav {
       width: 100%;
+      height: 44px;
       padding: 12px;
     }
   }
