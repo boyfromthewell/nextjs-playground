@@ -44,4 +44,8 @@ const Wrapper = styled.div`
   height: 100%;
   gap: 30px;
   padding: 0 40px;
+
+  @media (max-width: 575px) {
+    padding: 0px 12px;
+  }
 `;

@@ -112,7 +112,7 @@ const NavWrapper = styled.div`
   @media (max-width: 575px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: auto;
+    height: 30%;
 
     nav {
       width: 100%;

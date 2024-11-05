@@ -34,6 +34,14 @@ const PlaylistInfoContainer = styled.div`
   gap: 24px;
   padding: 24px;
   width: 100%;
+
+  @media (max-width: 575px) {
+    flex-direction: column;
+    padding: 0;
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 const InfoContainer = styled.div`
