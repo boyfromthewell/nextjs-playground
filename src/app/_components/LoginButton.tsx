@@ -65,6 +65,10 @@ const Wrapper = styled.div`
     font-size: 12px;
   }
   padding-right: 12px;
+
+  @media (max-width: 575px) {
+    margin-bottom: 5%;
+  }
 `;
 
 const LoginSignup = styled.div`
@@ -80,7 +84,7 @@ const LoginSignup = styled.div`
 
   @media (max-width: 575px) {
     p {
-      font-size: 1rem;
+      font-size: 1.25rem;
     }
   }
 `;
@@ -88,15 +92,34 @@ const LoginSignup = styled.div`
 const Button = styled.button`
   width: fit-content;
   height: 42px;
-  padding: 12px;
+  padding: 0 16px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  font-weight: 600;
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
   @media (max-width: 575px) {
     height: 32px;
     font-size: 0.7rem;
+    padding: 0 12px;
   }
 `;
 
@@ -119,7 +142,7 @@ const Name = styled.p`
   font-size: 17px;
   font-weight: 500;
   @media (max-width: 575px) {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 `;
 
@@ -134,6 +157,6 @@ const Chip = styled.div`
   font-size: 10px;
   padding: 8px;
   @media (max-width: 575px) {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 `;

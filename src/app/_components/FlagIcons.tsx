@@ -73,6 +73,16 @@ const IconContainer = styled.div`
     margin: 0 12px;
     box-sizing: border-box;
   }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    margin: 0 12px;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
+    margin: 0 12px;
+    box-sizing: border-box;
+  }
 `;
 
 const ArrowDownIcon = styled(ArrowIcon)`

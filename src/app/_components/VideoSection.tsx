@@ -49,7 +49,16 @@ const Wrapper = styled.div`
   height: 100%;
   gap: 30px;
   padding: 0 40px;
+  line-height: 24px;
   @media (max-width: 575px) {
+    padding: 24px 12px;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    padding: 24px 12px;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
     padding: 24px 12px;
   }
 `;

@@ -29,7 +29,7 @@ const GotoChannel = styled.button`
   font-size: 20px;
   font-weight: 600;
 
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     font-size: 0.725rem;
     margin-top: 4px;
   }

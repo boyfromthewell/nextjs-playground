@@ -26,10 +26,14 @@ const ModalContainer = styled.div`
   background: #ffffff;
   position: relative;
   top: 30%;
-  max-width: 80vw;
-  min-width: 600px;
+  width: 770px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   height: 450px;
+  z-index: 9999;
+
+  @media (max-width: 991px) {
+    width: 70vw;
+  }
 `;

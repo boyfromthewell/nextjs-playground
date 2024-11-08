@@ -1,8 +1,9 @@
 .container {
   display: flex;
   flex-direction: row; /* 기본값은 가로 정렬 */
-
-  @media (max-width: 575px) {
+  width: 100%;
+  @media (max-width: 991px) {
+    width: 100%;
     flex-direction: column;
   }
 }

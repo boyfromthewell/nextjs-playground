@@ -8,13 +8,20 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
   }
-  button {
+  button, input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
     background-color: inherit;
-  }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
   a {
     text-decoration:none;
     color:inherit;
+  }
+
+  button, input, textarea, select {
+    font-family: inherit;
   }
 `;
 export default GlobalStyle;

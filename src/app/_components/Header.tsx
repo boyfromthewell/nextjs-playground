@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import LoginButton from './LoginButton';
+
+import ThumbIcon from '../../../public/thumb.png';
 import Chim from '../../../public/chimhaha.jpg';
 import ChimPlus from '../../../public/chimhaha_plus.jpg';
 import ChimOrigin from '../../../public/chim_live.jpg';
@@ -15,7 +17,10 @@ export default function Header() {
       </Title>
       <NavWrapper>
         <nav>
-          <Link href="/">인기 동영상</Link>
+          <Link href="/">
+            <Image src={ThumbIcon} alt="logo" width="30" height="30" />
+            인기 동영상
+          </Link>
         </nav>
         <nav>
           <Link href="/chimhaha">
@@ -52,7 +57,7 @@ const Wrapper = styled.header`
   margin-bottom: 22px;
 
   @media (max-width: 575px) {
-    padding: 20px 8px;
+    display: none;
   }
 `;
 

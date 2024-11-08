@@ -18,37 +18,39 @@ interface VideoInfoProps {
 export default function VideoInfo({ info, type }: VideoInfoProps) {
   return (
     <VideoInfoContainer>
-      <Image
-        priority
-        src={info.snippet.thumbnails.standard?.url || ''}
-        alt="썸네일 이미지"
-        width={480}
-        height={360}
-        style={{ borderRadius: 8 }}
-      />
-      <Infos>
-        {type === 'COMMON' && (
-          <GotoChannelBtn
-            channel={info.snippet.channelTitle}
-            id={info.snippet.channelId}
-          />
-        )}
-        <Link
-          href={
-            type === 'COMMON'
-              ? `/video/${info.id}`
-              : `/video/${info.snippet.resourceId?.videoId}`
-          }
-        >
+      <Link
+        href={
+          type === 'COMMON'
+            ? `/video/${info.id}`
+            : `/video/${info.snippet.resourceId?.videoId}`
+        }
+      >
+        <Image
+          priority
+          src={info.snippet.thumbnails.standard?.url || ''}
+          alt="썸네일 이미지"
+          width={480}
+          height={360}
+          style={{ borderRadius: 8 }}
+        />
+        <Infos>
+          {type === 'COMMON' && (
+            <GotoChannelBtn
+              channel={info.snippet.channelTitle}
+              id={info.snippet.channelId}
+            />
+          )}
+
           <Title>{info.snippet.title}</Title>
-        </Link>
-        <Tags>
-          {info.snippet.tags
-            ?.slice(0, 6)
-            .map((text) => <Tag key={text}>#{text}</Tag>)}
-        </Tags>
-        <Published>{dateStrToKorStr(info.snippet.publishedAt)}</Published>
-      </Infos>
+
+          <Tags>
+            {info.snippet.tags
+              ?.slice(0, 6)
+              .map((text) => <Tag key={text}>#{text}</Tag>)}
+          </Tags>
+          <Published>{dateStrToKorStr(info.snippet.publishedAt)}</Published>
+        </Infos>
+      </Link>
     </VideoInfoContainer>
   );
 }
@@ -58,8 +60,33 @@ const VideoInfoContainer = styled.div`
   gap: 24px;
   padding: 24px;
   width: 100%;
+  line-height: 24px;
 
   @media (max-width: 575px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -87,8 +114,23 @@ const Title = styled.h2`
   padding: 14px;
   border-radius: 8px;
   border: 1px solid lightgray;
+  margin-top: 12px;
 
   @media (max-width: 575px) {
+    word-break: break-all;
+    white-space: pre-wrap;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    word-break: break-all;
+    white-space: pre-wrap;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
     word-break: break-all;
     white-space: pre-wrap;
     width: 100%;
@@ -117,11 +159,26 @@ const Tag = styled.p`
   @media (max-width: 575px) {
     font-size: 0.925rem;
   }
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: 0.925rem;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
+    font-size: 0.925rem;
+  }
 `;
 
 const Published = styled.p`
   margin-left: auto;
   @media (max-width: 575px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 576px) and (max-width: 767px) {
     font-size: 0.8rem;
   }
 `;

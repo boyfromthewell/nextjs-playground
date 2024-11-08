@@ -19,6 +19,7 @@ export default function Home() {
 }
 
 const PageWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
 `;

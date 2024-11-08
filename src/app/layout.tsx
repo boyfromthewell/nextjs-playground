@@ -5,6 +5,7 @@ import StyledComponentsRegistry from '@/lib/registry';
 import RQProvider from '@/lib/RQProvider';
 import Header from './_components/Header';
 import AuthSession from '@/lib/SessionProvider';
+import MobileHeader from './_components/MobileHeader';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.ttf',
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <AuthSession>
           <Header />
+          <MobileHeader />
           <RQProvider>
             <StyledComponentsRegistry>
               {children}
