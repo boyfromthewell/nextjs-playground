@@ -1,5 +1,7 @@
+import { dateStrToKorStr } from '@/lib/date';
 import { VideoDetail } from '@/types/Video';
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 
 export default function VideoInfo({ info }: { info: VideoDetail }) {
   const {
@@ -11,15 +13,57 @@ export default function VideoInfo({ info }: { info: VideoDetail }) {
     commentCount,
   } = info;
 
+  const [prevCount, setPrevCount] = useState({
+    likeCount,
+    viewCount,
+    commentCount,
+  });
+
+  const [isAnimating, setIsAnimating] = useState({
+    likeCount: false,
+    viewCount: false,
+    commentCount: false,
+  });
+
+  useEffect(() => {
+    const detectNewValue = {
+      likeCount: likeCount !== prevCount.likeCount,
+      viewCount: viewCount !== prevCount.viewCount,
+      commentCount: commentCount !== prevCount.commentCount,
+    };
+
+    setIsAnimating(detectNewValue);
+    setPrevCount({ likeCount, viewCount, commentCount });
+
+    const timeout = setTimeout(() => {
+      setIsAnimating({
+        likeCount: false,
+        viewCount: false,
+        commentCount: false,
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [likeCount, viewCount, commentCount]);
+
   return (
     <InfoWrapper>
       <h2>{title}</h2>
       <Description>
         <ViewCountDate>
-          조회수 <p>{viewCount}</p> <p>{publishedAt}</p>
+          <ViewCount $isHightlight={isAnimating.viewCount}>
+            조회수 {viewCount}
+          </ViewCount>{' '}
+          / {dateStrToKorStr(publishedAt)}
         </ViewCountDate>
         <CommentLikeCount>
-          좋아요 <p>{likeCount}</p> 댓글 <p>{commentCount}</p>
+          <LikeCount $isHightlight={isAnimating.likeCount}>
+            좋아요 {likeCount}
+          </LikeCount>{' '}
+          /
+          <CommentCount $isHightlight={isAnimating.commentCount}>
+            댓글 {commentCount}
+          </CommentCount>
         </CommentLikeCount>
         <ScrollableDescription>{description}</ScrollableDescription>
       </Description>
@@ -31,19 +75,40 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 24px;
+
   height: 35%;
+  line-height: 24px;
   h2 {
     font-weight: 600;
     font-size: 27px;
   }
 
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     h2 {
       font-size: 1.25rem;
       line-height: 24px;
     }
   }
 `;
+
+const blinkAnimation = keyframes`
+  0%, 100% { color: #0f0f0f; }
+  50% { color: #6baed6; } 
+`;
+
+const ViewCount = styled.p<{ $isHightlight: boolean }>`
+  ${({ $isHightlight }) =>
+    $isHightlight &&
+    css`
+      animation: ${blinkAnimation} 0.5s ease-in-out;
+    `}
+  font-weight: 600;
+  color: #0f0f0f;
+`;
+
+const CommentCount = styled(ViewCount)``;
+
+const LikeCount = styled(ViewCount)``;
 
 const Description = styled.div`
   display: flex;
@@ -64,7 +129,7 @@ const ViewCountDate = styled.div`
     font-weight: 600;
   }
 
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     p {
       font-size: 1rem;
     }
@@ -72,7 +137,7 @@ const ViewCountDate = styled.div`
 `;
 
 const CommentLikeCount = styled(ViewCountDate)`
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     font-size: 0.925rem;
   }
 `;
@@ -82,7 +147,7 @@ const ScrollableDescription = styled.span`
   max-height: 100%;
   padding-right: 8px;
   white-space: pre-wrap;
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     border-top: 1px solid black;
     padding-top: 8px;
     font-size: 0.9rem;

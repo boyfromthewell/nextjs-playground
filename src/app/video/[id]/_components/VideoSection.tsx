@@ -7,7 +7,6 @@ import ReactPlayer from 'react-player/youtube';
 import styled from 'styled-components';
 import VideoInfo from './VideoInfo';
 import { VideoDetail } from '@/types/Video';
-import Comments from './Comments';
 
 export default function VideoSection({ id }: { id: string }) {
   const [isWindow, setIsWindow] = useState(false);
@@ -17,7 +16,7 @@ export default function VideoSection({ id }: { id: string }) {
     queryFn: getVideoDetail,
     staleTime: 0,
     refetchOnMount: true,
-    refetchInterval: 10000, // refetch 10초 (좋아요 실시간 변동 보임)
+    refetchInterval: 3000, // refetch 10초 (좋아요 실시간 변동 보임)
   });
 
   useEffect(() => {
@@ -42,29 +41,31 @@ export default function VideoSection({ id }: { id: string }) {
 }
 
 const VideoInfoSection = styled.div`
-  width: 60%;
+  width: 80%;
   height: auto;
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     width: 100%;
   }
 `;
 
 const VideoWrapper = styled.div`
   width: 100%;
-  height: 65%;
+  height: 60%;
   padding: 18px;
   background-color: black;
   @media (max-width: 575px) {
+    width: 100%;
     height: 360px;
   }
-`;
 
-const Info = styled.div`
-  display: flex;
-  width: 100%;
-  height: max-content;
-  background-color: gray;
+  @media (min-width: 576px) and (max-width: 767px) {
+    height: 440px;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    height: 520px;
+  }
 `;
