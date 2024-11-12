@@ -8,14 +8,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-
 model User {
-  id        Int       @id @default(autoincrement())
   email     String    @default("")
-  name      String   @default("")
+  name      String    @default("")
   image     String?   @default("")
   provider  String?   @default("")
   createdAt DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  id        String    @id
+  password  String?   @default("")
 }
 
 model Video {
