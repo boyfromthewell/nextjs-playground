@@ -34,7 +34,6 @@ export default function FlagIcons({ onClick, selectCode }: FlagIconsProp) {
     );
   };
 
-  console.log(ICON_DATA.find(({ code }) => code === selectCode));
   return (
     <IconContainer onClick={toggleSelect}>
       <SelectValue>{renderSelectValue()}</SelectValue>

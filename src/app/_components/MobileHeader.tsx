@@ -2,11 +2,19 @@
 
 import styled from 'styled-components';
 import BurgerIcon from '../../../public/burger.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MobileMenu from './MobileMenu';
+import { usePathname } from 'next/navigation';
 
 export default function MobileHeader() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [currentPath, setCurrentPath] = useState('');
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setCurrentPath(pathname);
+    setIsOpenMenu(false);
+  }, [pathname]);
 
   return (
     <>
@@ -15,7 +23,12 @@ export default function MobileHeader() {
           <BurgerIcon />
         </BurgerBtn>
       </Wrapper>
-      {isOpenMenu && <MobileMenu onClose={() => setIsOpenMenu(false)} />}
+      {isOpenMenu && (
+        <MobileMenu
+          onClose={() => setIsOpenMenu(false)}
+          currentPath={currentPath}
+        />
+      )}
     </>
   );
 }
@@ -23,10 +36,12 @@ export default function MobileHeader() {
 const Wrapper = styled.div`
   @media (max-width: 575px) {
     width: 100%;
-    height: 52px;
+    height: 64px;
     margin-bottom: 12px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    padding: 0 12px;
   }
   @media (min-width: 576px) {
     display: none;
@@ -39,7 +54,6 @@ const BurgerBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
   border: none;
 
   svg {

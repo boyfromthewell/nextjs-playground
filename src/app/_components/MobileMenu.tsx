@@ -10,7 +10,13 @@ import ChimOrigin from '../../../public/chim_live.jpg';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function MobileMenu({ onClose }: { onClose: () => void }) {
+export default function MobileMenu({
+  onClose,
+  currentPath,
+}: {
+  onClose: () => void;
+  currentPath: string;
+}) {
   useDisableBodyScroll();
 
   const MENU_DATA = [
@@ -45,7 +51,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       </BtnWrapper>
       <MenuWrapper>
         {MENU_DATA.map(({ src, text, href }) => (
-          <Menu key={text}>
+          <Menu key={text} $isActive={currentPath === href}>
             <Link href={href}>
               {src && <Image src={src} width="50" height="50" alt={text} />}
               {text}
@@ -77,7 +83,9 @@ const Wrapper = styled.div`
 const BtnWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  height: 52px;
+  align-items: center;
+  height: 64px;
+  padding: 24px 12px 0 12px;
 `;
 
 const CloseBtn = styled.button`
@@ -86,7 +94,7 @@ const CloseBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+
   border: none;
 
   svg {
@@ -103,17 +111,19 @@ const MenuWrapper = styled.div`
   height: auto;
 `;
 
-const Menu = styled.nav`
+const Menu = styled.nav<{ $isActive: boolean }>`
   display: flex;
   width: 80%;
   height: 100px;
   border-bottom: 1px solid #0f0f0f;
+
   cursor: pointer;
   font-size: 1.25rem;
   a {
     padding: 8px;
     display: flex;
     align-items: center;
+    font-weight: ${(props) => props.$isActive && 600};
   }
 
   img {

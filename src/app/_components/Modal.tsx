@@ -30,7 +30,7 @@ const ModalContainer = styled.div`
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: max-content;
   z-index: 9999;
 
   @media (max-width: 991px) {
