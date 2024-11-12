@@ -1,28 +1,11 @@
 'use client';
 
 import { getComment } from '@/lib/api/comment';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
 import LikeIcon from '../../../../../public/like.svg';
 import DislikeIcon from '../../../../../public/dislike.svg';
 import { useSession } from 'next-auth/react';
-
-const updateComment = async (variables: {
-  commentId: number;
-  action: 'like' | 'dislike';
-}) => {
-  const response = await fetch(`/api/comment/${variables.commentId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: variables.action }),
-  });
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-
-  return response.json();
-};
 
 export default function CommentList({ videoId }: { videoId: string }) {
   const { data } = useQuery({
@@ -32,6 +15,7 @@ export default function CommentList({ videoId }: { videoId: string }) {
     refetchInterval: 30000,
   });
 
+  const queryClient = useQueryClient();
   const { data: user } = useSession();
 
   const controllBtnDisabled = (provider: string, userId: string) => {
@@ -51,7 +35,44 @@ export default function CommentList({ videoId }: { videoId: string }) {
   };
 
   const { mutate } = useMutation({
-    mutationFn: updateComment,
+    mutationFn: async (variables: {
+      commentId: number;
+      action: 'like' | 'dislike';
+    }) => {
+      const response = await fetch(`/api/comment/${variables.commentId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: variables.action }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      return response.json();
+    },
+    onMutate: async (variables) => {
+      const previousData = queryClient.getQueryData(['comment', videoId]);
+
+      queryClient.setQueryData(['comment', videoId], (oldData: any) => ({
+        ...oldData,
+        comments: oldData.comments.map((comment: any) =>
+          comment.id === variables.commentId
+            ? {
+                ...comment,
+                like:
+                  variables.action === 'like' ? comment.like + 1 : comment.like,
+                disLike:
+                  variables.action === 'dislike'
+                    ? comment.disLike + 1
+                    : comment.disLike,
+              }
+            : comment,
+        ),
+      }));
+
+      return { previousData };
+    },
   });
 
   const handleClickLike = (commentId: number) => {
@@ -104,6 +125,9 @@ const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
+  height: max-content;
+  overflow-y: auto;
   margin-top: 18px;
 `;
 

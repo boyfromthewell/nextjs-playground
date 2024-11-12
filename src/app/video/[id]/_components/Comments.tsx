@@ -48,9 +48,7 @@ export default function Comments({ id }: { id: string }) {
         resetText={resetText}
         sendComment={sendComment}
       />
-      <ListContainer>
-        <CommentList videoId={videoId} />
-      </ListContainer>
+      <CommentList videoId={videoId} />
     </CommentsContainer>
   );
 }
@@ -64,12 +62,4 @@ const CommentsContainer = styled.div`
     width: 100%;
     border-top: 2px solid lightgray;
   }
-`;
-
-const ListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 57dvh;
-  overflow-y: auto;
 `;

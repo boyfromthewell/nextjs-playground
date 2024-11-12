@@ -57,13 +57,16 @@ const OverlayForm = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 999;
-  width: calc(100% - 24px);
-  height: calc(100% - 24px);
-  background-color: rgba(255, 255, 255, 0.8);
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  top: -12px;
+  left: -12px;
+  background-color: rgba(0, 0, 0, 0.7);
   p {
     font-size: 1.125rem;
     line-height: 1.8rem;
     font-weight: 600;
+    color: #45b6fe;
   }
 `;
 
