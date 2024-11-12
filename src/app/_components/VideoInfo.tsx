@@ -57,44 +57,27 @@ export default function VideoInfo({ info, type }: VideoInfoProps) {
 
 const VideoInfoContainer = styled.div`
   display: flex;
-  gap: 24px;
+  flex-direction: row;
+
   padding: 24px;
   width: 100%;
   line-height: 24px;
-
-  @media (max-width: 575px) {
-    width: 100%;
+  a {
+    width: inherit;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 0;
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
+    gap: 24px;
   }
-
-  @media (min-width: 768px) and (max-width: 991px) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 0;
-    img {
+  @media (max-width: 991px) {
+    a {
       width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  @media (min-width: 576px) and (max-width: 767px) {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 0;
-    img {
-      width: 100%;
-      object-fit: cover;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 `;
@@ -116,21 +99,7 @@ const Title = styled.h2`
   border: 1px solid lightgray;
   margin-top: 12px;
 
-  @media (max-width: 575px) {
-    word-break: break-all;
-    white-space: pre-wrap;
-    width: 100%;
-    font-size: 1.2rem;
-  }
-
-  @media (min-width: 768px) and (max-width: 991px) {
-    word-break: break-all;
-    white-space: pre-wrap;
-    width: 100%;
-    font-size: 1.2rem;
-  }
-
-  @media (min-width: 576px) and (max-width: 767px) {
+  @media (max-width: 991px) {
     word-break: break-all;
     white-space: pre-wrap;
     width: 100%;
