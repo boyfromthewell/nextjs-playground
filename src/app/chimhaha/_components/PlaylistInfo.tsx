@@ -32,16 +32,26 @@ export default function PlaylistInfo({ info }: { info: any }) {
 
 const PlaylistInfoContainer = styled.div`
   display: flex;
-  gap: 24px;
   padding: 24px;
   width: 100%;
 
+  a {
+    width: inherit;
+    display: flex;
+    gap: 24px;
+  }
   @media (max-width: 991px) {
-    flex-direction: column;
     padding: 0;
-    img {
+    a {
       width: 100%;
-      object-fit: cover;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 `;
@@ -54,7 +64,13 @@ const InfoContainer = styled.div`
   width: 100%;
 
   h2 {
-    font-size: 32px;
+    font-size: 1.8rem;
+    margin: 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ddd;
+    color: #333;
+    line-height: 1.4;
+    word-break: keep-all;
     margin-top: 12px;
   }
   p {
@@ -67,12 +83,6 @@ const InfoContainer = styled.div`
   }
 
   @media (max-width: 991px) {
-    h2 {
-      font-size: 1.8rem;
-      border: 2px solid #0f0f0f;
-      padding: 12px;
-      border-radius: 8px;
-    }
     p {
       font-size: 1rem;
     }

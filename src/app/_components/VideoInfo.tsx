@@ -68,6 +68,7 @@ const VideoInfoContainer = styled.div`
     gap: 24px;
   }
   @media (max-width: 991px) {
+    padding: 0;
     a {
       width: 100%;
       display: flex;
